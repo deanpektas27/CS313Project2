@@ -31,10 +31,6 @@ void writeToPlate(char exp)
 
 void evaluateExpression(string expression) 
 {
-
-
-
-
     //Go through each char in the string and store in stack.
     for(int x = 0; x < expression.length(); x++) 
     {
