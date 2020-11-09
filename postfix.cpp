@@ -52,7 +52,7 @@ int main()
     outfile << fixed << showpoint;
     //outputs the amount of decimal places to be displayed, in this case its 2.
     outfile << setprecision(2); 
-
+    //reads file and stores in ch.
     infile >> ch;
     //While loop used to read through entire input file.
     while (infile)
@@ -68,7 +68,7 @@ int main()
         infile >> ch; //begin processing the next expression
     } //end while 
 
-    //stop reading from and writing to files.
+    //stop reading from and writing to files, closes files.
     infile.close();
     outfile.close();
 
@@ -80,7 +80,7 @@ int main()
 void evaluateExpression(ifstream& inpF, ofstream& outF, stackType<double>& stack,char& ch, bool& isExpOk)
 {
     double num;
-    //while loop that scans through each char in expression
+    //while loop scans through each char in expression
     while (ch != '=')
     {
     //while given char does not equal to '=',
@@ -104,10 +104,11 @@ void evaluateExpression(ifstream& inpF, ofstream& outF, stackType<double>& stack
 
             break;
         default: 
+        //passes current stack and output into further evaluation
             evaluateOpr(outF, stack, ch, isExpOk);
         }//end switch
 
-        if (isExpOk) //if no error
+        if (isExpOk) //if no error with expression, write into ch and output it.
         {
             inpF >> ch;
             outF << ch;
@@ -120,12 +121,13 @@ void evaluateExpression(ifstream& inpF, ofstream& outF, stackType<double>& stack
     } //end while (!= '=')
 } //end evaluateExpression.
 
-
+//verify stack can perform operations on and then perform them.
 void evaluateOpr(ofstream& out, stackType<double>& stack,
               char& ch, bool& isExpOk)
 {
     double op1, op2;
 
+    //checks if stack is empty, fails evaluation.
     if (stack.isEmptyStack())
     {
         out << " (Not enough operands)";
@@ -133,9 +135,10 @@ void evaluateOpr(ofstream& out, stackType<double>& stack,
     }
     else
     {
+    //set op2 to the top of the stack and remove that value from the stack.
         op2 = stack.top();
         stack.pop();
-
+    //checks if stack is empty once the top element of the stack is removed.
         if (stack.isEmptyStack())
         {
             out << " (Not enough operands)";
@@ -143,9 +146,11 @@ void evaluateOpr(ofstream& out, stackType<double>& stack,
         }
         else
         {
+        //set op1 to the current top of stack, remove that value from stack.
             op1 = stack.top();
             stack.pop();
-
+        //perform specific operation on top two values in the stack based on
+        //what ch is when it was passed into this function.
             switch (ch)
             {
             case '+': 
@@ -166,6 +171,7 @@ void evaluateOpr(ofstream& out, stackType<double>& stack,
                     isExpOk = false;
                 }
                 break;
+            //any operator that is not listed above is considered illegal.
             default:  
                 out << " (Illegal operator)";
                 isExpOk = false;
@@ -191,12 +197,13 @@ void printResult(ofstream& outF, stackType<double>& stack,
 
     if (isExpOk) //if no error, print the result
     {
-        if (!stack.isEmptyStack())
+        if (!stack.isEmptyStack())//if stack is not empty, store top of stack
+                               //into result and remove that value from the stack. 
         {
             result = stack.top();
             stack.pop();
 
-            if (stack.isEmptyStack())
+            if (stack.isEmptyStack())//if stack is empty, print results.
                 outF << result << endl;
             else
                 outF << " (Error: Too many operands)" << endl;
