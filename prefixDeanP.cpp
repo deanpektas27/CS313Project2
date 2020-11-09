@@ -66,7 +66,10 @@ double evaluateExpression(string expression)
 
 
 int main(){
-    string exp = "+9*26";
+    string exp;
+    cout << "Enter expression" << endl;
+    cin >> exp;
     cout << evaluateExpression(exp) << endl;
+    return 0;
     
 }
