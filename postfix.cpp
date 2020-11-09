@@ -84,8 +84,8 @@ void evaluateExpression(ifstream& inpF, ofstream& outF, stackType<double>& stack
     while (ch != '=')
     {
     //while given char does not equal to '=',
-    //if char contains '#', read from file and store into num, output num with a 
-    //space onto output file.
+    //if char contains '#', read from file and store into num, output num
+    //onto output file.
         switch (ch)
         {
         case '#': 
