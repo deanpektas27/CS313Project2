@@ -1,4 +1,4 @@
-//Dean Pektas CS313 11/8/20
+//Dean Pektas CS313 Q6 11/8/20
 
 #include <iostream>  
 #include <iomanip>
@@ -55,7 +55,7 @@ void evaluateExpression(string expression)
     //once finished pushing expression into stack, make sure stack not empty,
     //the end of the expression starts at the top of the stack,
     //insert end of expression into temporary var and print it.
-    while(!Stack.empty()) {
+    while(!Stack.empty())
         plate = Stack.top();
         cout << plate << " ";
         Stack.pop();

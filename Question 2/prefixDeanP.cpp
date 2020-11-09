@@ -1,4 +1,4 @@
-//Dean Pektas CS313 11/8/20
+//Dean Pektas CS313 Q2 11/8/20
 
 #include <iostream>  
 #include <iomanip>
