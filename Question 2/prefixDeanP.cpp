@@ -11,6 +11,7 @@ using namespace std;
 //Creating empty stack to store the operands and operators where necessary.
 stack<double> Stack;
 
+//Checks if given char in expression is a number.
 bool isOperand(char ch)
 {
     return isdigit(ch);
@@ -18,6 +19,7 @@ bool isOperand(char ch)
 
 void evaluateOpr(char c, double op1, double op2)
 {
+    //switch statement checks what operator is in the expression and applies it to both values.
         switch(c)
         {
             case '+':
@@ -51,10 +53,12 @@ double evaluateExpression(string expression)
        //If given char is not a number, its an operator
        else
        {
+        //take the first available operands and remove them from stack
            double op1 = Stack.top();
            Stack.pop();
            double op2 = Stack.top();
            Stack.pop();
+        //pass through operands to function to perform first operation thats in expression
            evaluateOpr(expression[x],op1,op2);
        }
        
@@ -64,7 +68,7 @@ double evaluateExpression(string expression)
     return Stack.top();
 }
 
-
+//Allows for user to enter a prefix expression for evaluation
 int main(){
     string exp;
     cout << "Enter expression" << endl;
